@@ -14,13 +14,13 @@ Thank you for your interest in contributing to Fluent Schedule! This document pr
 1. Fork the repository on GitHub
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/your-username/fluent_schedule.git
+   git clone https://github.com/your-username/fluent_schedule_js.git
    cd fluent_schedule
    ```
 
 3. Add the upstream remote:
    ```bash
-   git remote add upstream https://github.com/Jacques-Murray/fluent_schedule.git
+   git remote add upstream https://github.com/Jacques-Murray/fluent_schedule_js.git
    ```
 
 4. Create a development branch:
