@@ -136,7 +136,7 @@ const twoHours = hours(2);         // 7200000
 
 ### Weekday Enum
 
-// The Weekday enum is defined as follows:
+```typescript
 enum Weekday {
   Sunday = 0,
   Monday = 1,
@@ -146,6 +146,7 @@ enum Weekday {
   Friday = 5,
   Saturday = 6
 }
+```
 
 ### Scheduler Methods
 
@@ -181,17 +182,10 @@ See the `examples/` directory for more usage examples:
 
 - `simple.ts` - Basic usage with multiple job types
 
-Run an example:
+Run an example with TypeScript directly (using tsx):
 
 ```bash
-npm run build
-node dist/examples/simple.js
-```
-
-Or with TypeScript directly (using ts-node):
-
-```bash
-npx ts-node examples/simple.ts
+npx tsx examples/simple.ts
 ```
 
 ## Testing
