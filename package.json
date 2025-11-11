@@ -1,0 +1,40 @@
+{
+  "name": "fluent-schedule",
+  "version": "1.0.0",
+  "description": "A human-readable, fluent task scheduling library for Node.js.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jacques-Murray/fluent_schedule_js"
+  },
+  "license": "MIT",
+  "author": "Jacques Murray",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "schedule",
+    "scheduler",
+    "job",
+    "cron",
+    "fluent",
+    "task"
+  ],
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
+  }
+}
