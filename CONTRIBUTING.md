@@ -6,7 +6,8 @@ Thank you for your interest in contributing to Fluent Schedule! This document pr
 
 ### Prerequisites
 
-- Rust 1.70 or later (stable toolchain recommended)
+- Node.js 16 or later (LTS version recommended)
+- npm (comes with Node.js)
 - Git
 
 ### Getting Started
@@ -15,7 +16,7 @@ Thank you for your interest in contributing to Fluent Schedule! This document pr
 2. Clone your fork locally:
    ```bash
    git clone https://github.com/your-username/fluent_schedule_js.git
-   cd fluent_schedule
+   cd fluent_schedule_js
    ```
 
 3. Add the upstream remote:
@@ -23,7 +24,12 @@ Thank you for your interest in contributing to Fluent Schedule! This document pr
    git remote add upstream https://github.com/Jacques-Murray/fluent_schedule_js.git
    ```
 
-4. Create a development branch:
+4. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+5. Create a development branch:
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -32,53 +38,44 @@ Thank you for your interest in contributing to Fluent Schedule! This document pr
 
 Build the project:
 ```bash
-cargo build
+npm run build
 ```
 
 Run tests:
 ```bash
-cargo test
+npm test
 ```
 
-Run tests with verbose output:
+Run tests with coverage:
 ```bash
-cargo test --verbose
+npm test -- --coverage
 ```
 
-Run a specific example:
+Run a specific example with TypeScript directly (using tsx):
 ```bash
-cargo run --example simple
-```
-
-Generate documentation:
-```bash
-cargo doc --open
+npx tsx examples/simple.ts
 ```
 
 ## Code Style
 
-This project follows standard Rust conventions:
+This project follows standard TypeScript conventions:
 
-- Use `rustfmt` for code formatting
-- Use `clippy` for linting
-- Follow the [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- Use TypeScript's strict mode
+- Follow consistent naming conventions (camelCase for variables/functions, PascalCase for classes)
+- Write clear, self-documenting code
+- Add JSDoc comments for public APIs
 
-Format code before committing:
-```bash
-cargo fmt
-```
-
-Check for linting issues:
-```bash
-cargo clippy
-```
+The project uses:
+- **TypeScript** for type safety
+- **Jest** for testing
+- **ESLint/Prettier** (if configured) for code formatting
 
 ## Testing
 
 - All new features must include comprehensive tests
 - Tests should cover both happy path and error cases
-- Use `cargo test` to run the full test suite
-- Doc tests are also required for public APIs
+- Use `npm test` to run the full test suite
+- Tests are written using Jest
 
 ### Test Coverage
 
@@ -91,11 +88,12 @@ Aim for high test coverage. Key areas to test:
 
 ## Pull Request Process
 
-1. Ensure all tests pass and code is formatted
-2. Update documentation if needed
-3. Write clear commit messages
-4. Create a pull request with a descriptive title
-5. Wait for review and address feedback
+1. Ensure all tests pass (`npm test`)
+2. Build the project successfully (`npm run build`)
+3. Update documentation if needed
+4. Write clear commit messages
+5. Create a pull request with a descriptive title
+6. Wait for review and address feedback
 
 ### Commit Messages
 
@@ -115,15 +113,16 @@ Example: `feat: add support for monthly scheduling`
 
 - **`Job`**: Builder pattern for creating scheduled tasks
 - **`Scheduler`**: Runtime that executes jobs at their scheduled times
-- **`FluentDuration`**: Extension trait for human-readable time durations
-- **`SchedulerError`**: Error types for configuration issues
+- **Time Unit Helpers**: Functions (`seconds`, `minutes`, `hours`) for human-readable time durations
+- **Error Types**: Typed errors for configuration issues (`InvalidTimeFormatError`, `TaskNotSetError`)
 
 ### Key Design Decisions
 
 - **Builder Pattern**: Jobs use a fluent builder for readable configuration
-- **Single Threaded**: Scheduler runs in one thread for simplicity
+- **Single Threaded**: Scheduler runs using Node.js event loop and timers
 - **Error Collection**: Invalid configurations are caught early with clear error messages
-- **Zero-Copy**: Tasks are stored as boxed closures to avoid unnecessary allocations
+- **Type Safety**: Full TypeScript support with strict typing
+- **Async Support**: Jobs can be synchronous or asynchronous functions
 
 ## Adding New Features
 
@@ -131,42 +130,41 @@ Example: `feat: add support for monthly scheduling`
 
 When adding new scheduling capabilities:
 
-1. Extend the `ScheduleRules` struct in `job.rs`
-2. Add builder methods to `Job` impl block
-3. Implement time calculation logic in `calculate_next_run`
+1. Extend the `ScheduleRules` type in `job.ts`
+2. Add builder methods to `Job` class
+3. Implement time calculation logic in `calculateNextRun`
 4. Add comprehensive tests
 5. Update documentation and examples
 
 ### Error Types
 
 New error conditions should:
-- Be added to the `SchedulerError` enum
+- Extend the base `SchedulerError` class in `errors.ts`
 - Include descriptive error messages
-- Have appropriate `Display` implementations
+- Have appropriate error type checking
 - Be tested for proper error propagation
 
 ## Documentation
 
-- All public APIs must have documentation comments
+- All public APIs should have JSDoc comments
 - Include code examples where helpful
 - Keep the README updated with new features
-- Update doc tests when APIs change
+- Update TypeScript type definitions when APIs change
 
 ## Performance Considerations
 
 - Keep the scheduler loop efficient
-- Avoid blocking operations in job closures
+- Avoid blocking operations in job callbacks
 - Consider memory usage for long-running applications
-- Profile performance-critical sections
+- Profile performance-critical sections with Node.js profiling tools
 
 ## Code Review Checklist
 
 Before submitting a PR, ensure:
 
-- [ ] Code compiles without warnings
-- [ ] All tests pass
-- [ ] Code is formatted with `cargo fmt`
-- [ ] No clippy warnings
+- [ ] Code compiles without errors (`npm run build`)
+- [ ] All tests pass (`npm test`)
+- [ ] Code follows TypeScript best practices
 - [ ] Documentation is updated
 - [ ] New features include tests
 - [ ] Commit messages follow conventions
