@@ -136,17 +136,16 @@ const twoHours = hours(2);         // 7200000
 
 ### Weekday Enum
 
-```typescript
-import { Weekday } from 'fluent-schedule';
-
-// Weekday.Sunday = 0
-// Weekday.Monday = 1
-// Weekday.Tuesday = 2
-// Weekday.Wednesday = 3
-// Weekday.Thursday = 4
-// Weekday.Friday = 5
-// Weekday.Saturday = 6
-```
+// The Weekday enum is defined as follows:
+enum Weekday {
+  Sunday = 0,
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6
+}
 
 ### Scheduler Methods
 
