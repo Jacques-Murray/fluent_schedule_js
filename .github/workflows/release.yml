@@ -46,6 +46,11 @@ jobs:
       - name: Bump version
         run: 'npm version ${{ github.event.inputs.bump }} -m "chore(release): v%s"'
 
+      - name: Commit version bump
+        run: |
+          git add package.json package-lock.json
+          git commit -m "chore(release): version bump [skip ci]" || echo "No changes to commit"
+
       - name: Push changes and tags
         run: git push --follow-tags
 
